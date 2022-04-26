@@ -2,9 +2,9 @@
 {
     using System.Diagnostics;
 
-    using TasksControlSystem.Web.ViewModels;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using TasksControlSystem.Web.ViewModels;
 
     public class HomeController : BaseController
     {
