@@ -12,7 +12,7 @@ using TasksControlSystem.Data;
 namespace TasksControlSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220426115423_InitialCreate")]
+    [Migration("20220426130443_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -283,7 +283,7 @@ namespace TasksControlSystem.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("TasksControlSystem.Data.Models.ClientTask", b =>
@@ -339,7 +339,7 @@ namespace TasksControlSystem.Data.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("ClientTask");
+                    b.ToTable("ClientTasks");
                 });
 
             modelBuilder.Entity("TasksControlSystem.Data.Models.Location", b =>
@@ -380,7 +380,7 @@ namespace TasksControlSystem.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Location");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("TasksControlSystem.Data.Models.Setting", b =>
@@ -443,7 +443,7 @@ namespace TasksControlSystem.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Status");
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

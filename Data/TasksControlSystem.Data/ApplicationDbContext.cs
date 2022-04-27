@@ -6,11 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using TasksControlSystem.Data.Common.Models;
-    using TasksControlSystem.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using TasksControlSystem.Data.Common.Models;
+    using TasksControlSystem.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -23,6 +22,14 @@
             : base(options)
         {
         }
+
+        public DbSet<ClientTask> ClientTasks { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Status> Statuses { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 

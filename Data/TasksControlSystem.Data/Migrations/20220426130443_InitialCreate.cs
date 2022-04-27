@@ -59,7 +59,7 @@ namespace TasksControlSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -72,7 +72,7 @@ namespace TasksControlSystem.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +94,7 @@ namespace TasksControlSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Status",
+                name: "Statuses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -107,7 +107,7 @@ namespace TasksControlSystem.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.Id);
+                    table.PrimaryKey("PK_Statuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,7 +217,7 @@ namespace TasksControlSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -233,16 +233,16 @@ namespace TasksControlSystem.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.PrimaryKey("PK_Locations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Location_AspNetUsers_ApplicationUserId",
+                        name: "FK_Locations_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientTask",
+                name: "ClientTasks",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -261,28 +261,28 @@ namespace TasksControlSystem.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientTask", x => x.Id);
+                    table.PrimaryKey("PK_ClientTasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientTask_AspNetUsers_ApplicationUserId",
+                        name: "FK_ClientTasks_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ClientTask_Category_CategoryId",
+                        name: "FK_ClientTasks_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ClientTask_Location_LocationId",
+                        name: "FK_ClientTasks_Locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ClientTask_Status_StatusId",
+                        name: "FK_ClientTasks_Statuses_StatusId",
                         column: x => x.StatusId,
-                        principalTable: "Status",
+                        principalTable: "Statuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -337,43 +337,43 @@ namespace TasksControlSystem.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Category_IsDeleted",
-                table: "Category",
+                name: "IX_Categories_IsDeleted",
+                table: "Categories",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientTask_ApplicationUserId",
-                table: "ClientTask",
+                name: "IX_ClientTasks_ApplicationUserId",
+                table: "ClientTasks",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientTask_CategoryId",
-                table: "ClientTask",
+                name: "IX_ClientTasks_CategoryId",
+                table: "ClientTasks",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientTask_IsDeleted",
-                table: "ClientTask",
+                name: "IX_ClientTasks_IsDeleted",
+                table: "ClientTasks",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientTask_LocationId",
-                table: "ClientTask",
+                name: "IX_ClientTasks_LocationId",
+                table: "ClientTasks",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientTask_StatusId",
-                table: "ClientTask",
+                name: "IX_ClientTasks_StatusId",
+                table: "ClientTasks",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Location_ApplicationUserId",
-                table: "Location",
+                name: "IX_Locations_ApplicationUserId",
+                table: "Locations",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Location_IsDeleted",
-                table: "Location",
+                name: "IX_Locations_IsDeleted",
+                table: "Locations",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -382,8 +382,8 @@ namespace TasksControlSystem.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Status_IsDeleted",
-                table: "Status",
+                name: "IX_Statuses_IsDeleted",
+                table: "Statuses",
                 column: "IsDeleted");
         }
 
@@ -405,7 +405,7 @@ namespace TasksControlSystem.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ClientTask");
+                name: "ClientTasks");
 
             migrationBuilder.DropTable(
                 name: "Settings");
@@ -414,13 +414,13 @@ namespace TasksControlSystem.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "Locations");
 
             migrationBuilder.DropTable(
-                name: "Status");
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
