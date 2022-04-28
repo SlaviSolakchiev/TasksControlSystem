@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.312" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -21,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\TasksControlSystem.Data.Common\TasksControlSystem.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\TasksControlSystem.Data.Models\TasksControlSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\TasksControlSystem.Web.ViewModels\TasksControlSystem.Web.ViewModels.csproj" />
     <ProjectReference Include="..\TasksControlSystem.Services.Mapping\TasksControlSystem.Services.Mapping.csproj" />
   </ItemGroup>
 
