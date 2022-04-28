@@ -24,17 +24,19 @@ namespace TasksControlSystem.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<ApplicationRole> roleManager;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.roleManager = roleManager;
         }
 
         [BindProperty]
@@ -78,20 +80,28 @@ namespace TasksControlSystem.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            returnUrl ??= this.Url.Content("~/");
+            this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, FirstName = Input.FirstName, LastName = Input.LastName };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var user = new ApplicationUser { UserName = this.Input.UserName, FirstName = this.Input.FirstName, LastName = this.Input.LastName };
+                var result = await this._userManager.CreateAsync(user, this.Input.Password);
+
                 if (result.Succeeded)
                 {
-                    var currentUser = await this._userManager.GetUserAsync(this.User);
+                    if (!await this.roleManager.RoleExistsAsync("Client"))
+                    {
+                        await this.roleManager.CreateAsync(new ApplicationRole
+                        {
+                            Name = "Client",
+                        });
+                    }
 
-                    this._userManager.AddToRoleAsync(currentUser, "Client");
-                    _logger.LogInformation("User created a new account with password.");
+                    await this._userManager.AddToRoleAsync(user, "Client");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    this._logger.LogInformation("User created a new account with password.");
+                    var code = await this._userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -103,7 +113,7 @@ namespace TasksControlSystem.Web.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }
+            }    
 
             // If we got this far, something failed, redisplay form
             return Page();
